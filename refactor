@@ -1,0 +1,19 @@
+#!/bin/bash
+
+if [ ! $# -eq 3 ]; then
+    echo "refactor path [old pattern] [new pattern]"
+    exit 1
+fi
+
+path=$1
+old=$2
+new=$3
+
+echo "path: ${path}"
+echo "old: ${old}"
+echo "new ${new}"
+
+for file in $(find ${path} -name "*.hpp" -o -name "*.cpp" -o -name "*.h");
+do 
+    sed -i -e "s/\<${old}\>/${new}/g" ${file}
+done

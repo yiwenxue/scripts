@@ -1,0 +1,11 @@
+#!/bin/sh
+
+if [ $# -eq 0 ]; then
+    echo "formatter [path] (.clang-format needed)"
+    exit 1
+elif [ ! -d $1 ]; then
+    echo "$1 is not a valid path"
+    exit 1
+fi
+
+find $1 -name "*pp" -o -name "*.h" | xargs clang-format -style=file -i
